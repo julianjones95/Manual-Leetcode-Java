@@ -17,6 +17,7 @@ public class MinCost {
 			}
 			else {
 				System.out.println("Failed");
+				System.out.println(getMinCost(input[i]));
 			}
 		}
 		return;
@@ -25,15 +26,15 @@ public class MinCost {
 	public static int getMinCost(int[] cost) {
 
 
-		int[] dp = new int[cost.length];
+		int[] dp = new int[cost.length+1];
 
 		dp[0] = 0;
-		dp[1] = nums[0];
+		dp[1] = cost[0];
 
-		for(int i=0; i<cost.length; i++) {
-			cost[i] = Math.min(cost[i-1] , cost[i-2]) + cost[i];
+		for(int i=1; i<dp.length-1; i++) {
+			dp[i+1] = Math.min(dp[i] , dp[i-1]) + cost[i];
 		}
 
-
+		return Math.min(dp[cost.length], dp[cost.length-1]);
 	}
 }
